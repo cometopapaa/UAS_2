@@ -4,8 +4,8 @@
 include 'koneksi.php';
 include 'wisata.php';
 
-$mesinPencarianGunung = new MesinPencarianTabel($conn, "gunung");
-$gunungList = $mesinPencarianGunung->cariSemua();
+$mesinPencarianGunung = new MesinPencarianTabel($conn, "gunung"); //buat objek mesin pencarian gunung
+$gunungList = $mesinPencarianGunung->cariSemua(); // da panggil method dari objek diatas berdasarkan tabel yang di tentukan
 
 $mesinPencarianPantai = new MesinPencarianTabel($conn, "pantai");
 $pantaiList = $mesinPencarianPantai->cariSemua();
@@ -19,13 +19,20 @@ $warisanBudayaList = $mesinPencarianWarisanBudaya->cariSemua();
 $mesinPencarianResort = new MesinPencarianTabel($conn, "resort");
 $resortList = $mesinPencarianResort->cariSemua();
 
-$gunungRenderer = new ResultRenderer($gunungList);
+
+$gunungRenderer = new ResultRenderer($gunungList); //buat objek gunungrenderer dari class ResultRenderer di wisata.php
 $pantaiRenderer = new ResultRenderer($pantaiList);
 $resortRenderer = new ResultRenderer($resortList);
 $tempatBersejarahRenderer = new ResultRenderer($tempatBersejarahList);
 $warisanBudayaRenderer = new ResultRenderer($warisanBudayaList);
 
+
+$wisataPremium = new WisataPremium("Wisata Premium", "Lokasi Premium", "Deskripsi Premium", "Fasilitas Premium", "$100000", "Aktivitas Premium", "gambar_premium.jpg");
+
+
+
 ?>
+
 <head>
 
     <meta charset="UTF-8">
@@ -33,9 +40,7 @@ $warisanBudayaRenderer = new ResultRenderer($warisanBudayaList);
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <title>Aplikasi Parawisata Kelompok 7</title>
 
@@ -87,7 +92,7 @@ https://templatemo.com/tm-564-plot-listing
                             <span>Menu</span>
                         </a>
                         <!-- ***** Menu End ***** -->
-                            <!-- Form for search -->
+                        <!-- Form for search -->
                     </nav>
                 </div>
             </div>
@@ -110,7 +115,7 @@ https://templatemo.com/tm-564-plot-listing
                         <li><a href="category.php?category=Pantai#kesini"><span class="icon"><img src="assets/images/beach-lounge-svgrepo-com.svg" alt="Food"></span> Pantai &amp; Pulau</a></li>
                         <li><a href="category.php?category=tempat_bersejarah#kesini"><span class="icon"><img src="assets/images/old-monument-svgrepo-com.svg" alt="Vehicle"></span> Kota Bersejarah</a></li>
                         <li><a href="category.php?category=warisan_budaya#kesini"><span class="icon"><img src="assets/images/city-buildings-svgrepo-com.svg" alt="Shopping"></span>Warisan budaya</a></li>
-                        <li><a href="category.php?category=resort#kesini"><span class="icon"><img src="assets/images/resort-svgrepo-com.svg"alt="Travel"></span> Resort &amp; Spa</a></li>
+                        <li><a href="category.php?category=resort#kesini"><span class="icon"><img src="assets/images/resort-svgrepo-com.svg" alt="Travel"></span> Resort &amp; Spa</a></li>
                     </ul>
                 </div>
             </div>
@@ -134,37 +139,31 @@ https://templatemo.com/tm-564-plot-listing
                                     <div class="menu">
                                         <div class="first-thumb active">
                                             <div class="thumb">
-                                                <span class="icon"><img src="assets/images/mountain-svgrepo-com.svg"
-                                                        alt=""></span>
+                                                <span class="icon"><img src="assets/images/mountain-svgrepo-com.svg" alt=""></span>
                                                 Gunung
                                             </div>
                                         </div>
                                         <div>
                                             <div class="thumb">
-                                                <span class="icon"><img src="assets/images/beach-lounge-svgrepo-com.svg"
-                                                        alt=""></span>
+                                                <span class="icon"><img src="assets/images/beach-lounge-svgrepo-com.svg" alt=""></span>
                                                 Pantai &amp; Pulau
                                             </div>
                                         </div>
                                         <div>
                                             <div class="thumb">
-                                                <span class="icon"><img src="assets/images/old-monument-svgrepo-com.svg"
-                                                        alt=""></span>
+                                                <span class="icon"><img src="assets/images/old-monument-svgrepo-com.svg" alt=""></span>
                                                 Kota Bersejarah
                                             </div>
                                         </div>
                                         <div>
                                             <div class="thumb">
-                                                <span class="icon"><img
-                                                        src="assets/images/city-buildings-svgrepo-com.svg"
-                                                        alt=""></span>
+                                                <span class="icon"><img src="assets/images/city-buildings-svgrepo-com.svg" alt=""></span>
                                                 Warisan Budaya
                                             </div>
                                         </div>
                                         <div class="last-thumb">
                                             <div class="thumb">
-                                                <span class="icon"><img src="assets/images/resort-svgrepo-com.svg"
-                                                        alt=""></span>
+                                                <span class="icon"><img src="assets/images/resort-svgrepo-com.svg" alt=""></span>
                                                 Resort &amp; Spa
                                             </div>
                                         </div>
@@ -185,8 +184,7 @@ https://templatemo.com/tm-564-plot-listing
                                                                     wisatawan. Salah satu gunung yang memiliki
                                                                     pariwisata yang sangat ramai adalah Gunung Bromo di
                                                                     Jawa Timur.</p>
-                                                                <div class="main-white-button"><a href="#"><i
-                                                                            class="fa fa-eye"></i> Discover More</a>
+                                                                <div class="main-white-button"><a href="#"><i class="fa fa-eye"></i> Discover More</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -210,15 +208,13 @@ https://templatemo.com/tm-564-plot-listing
                                                                     pariwisata populer. Salah satu pantai yang sangat
                                                                     terkenal dan menjadi destinasi pariwisata utama
                                                                     adalah Pantai Kuta, Bali</p>
-                                                                <div class="main-white-button"><a href="#"><i
-                                                                            class="fa fa-eye"></i> Explore More</a>
+                                                                <div class="main-white-button"><a href="#"><i class="fa fa-eye"></i> Explore More</a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-7 align-self-center">
                                                             <div class="right-image">
-                                                                <img src="assets/images/banner-bg.jpeg"
-                                                                    alt="Foods on the table">
+                                                                <img src="assets/images/banner-bg.jpeg" alt="Foods on the table">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -236,15 +232,13 @@ https://templatemo.com/tm-564-plot-listing
                                                                 <p>Di Indonesia, terdapat banyak tempat bersejarah yang
                                                                     populer dan memiliki nilai historis yang tinggi
                                                                     salah satunya Candi Borobudur, Jawa Tengah </p>
-                                                                <div class="main-white-button"><a href="listing.html"><i
-                                                                            class="fa fa-eye"></i> More Listing</a>
+                                                                <div class="main-white-button"><a href="listing.html"><i class="fa fa-eye"></i> More Listing</a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-7 align-self-center">
                                                             <div class="right-image">
-                                                                <img src="assets/images/candi-borobudur-1_169.jpeg"
-                                                                    alt="cars in the city">
+                                                                <img src="assets/images/candi-borobudur-1_169.jpeg" alt="cars in the city">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -263,8 +257,7 @@ https://templatemo.com/tm-564-plot-listing
                                                                     populer, mencakup situs-situs bersejarah, bangunan
                                                                     berarsitektur klasik, dan kebudayaan tradisional
                                                                     yang kaya salah satunya adalah Monumen Nasional</p>
-                                                                <div class="main-white-button"><a href="#"><i
-                                                                            class="fa fa-eye"></i> Discover More</a>
+                                                                <div class="main-white-button"><a href="#"><i class="fa fa-eye"></i> Discover More</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -289,15 +282,12 @@ https://templatemo.com/tm-564-plot-listing
                                                                     berbagai destinasi, mulai dari pulau-pulau tropis
                                                                     hingga daerah pegunungan salah satunya adalah
                                                                     Amandara,Bali</p>
-                                                                <div class="main-white-button"><a rel="nofollow"
-                                                                        href="https://templatemo.com/contact"><i
-                                                                            class="fa fa-eye"></i> Read More</a></div>
+                                                                <div class="main-white-button"><a rel="nofollow" href="https://templatemo.com/contact"><i class="fa fa-eye"></i> Read More</a></div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-7 align-self-center">
                                                             <div class="right-image">
-                                                                <img src="assets/images/amandara.jpeg"
-                                                                    alt="Traveling Beach">
+                                                                <img src="assets/images/amandara.jpeg" alt="Traveling Beach">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -327,35 +317,85 @@ https://templatemo.com/tm-564-plot-listing
                         <div class="item">
                             <div class="row">
                                 <?php
-                                    $gunungRenderer->render();
+                                $gunungRenderer->render();//da panggil method render()
                                 ?>
                             </div>
                         </div>
                         <div class="item">
                             <div class="row">
                                 <?php
-                                    $pantaiRenderer->render();
+                                $pantaiRenderer->render();
                                 ?>
                             </div>
                         </div>
                         <div class="item">
                             <div class="row">
                                 <?php
-                                    $resortRenderer->render();
-                                ?> 
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="row">
-                                <?php
-                                    $tempatBersejarahRenderer->render();
+                                $resortRenderer->render();
                                 ?>
                             </div>
                         </div>
                         <div class="item">
                             <div class="row">
                                 <?php
-                                    $warisanBudayaRenderer->render();
+                                $tempatBersejarahRenderer->render();
+                                ?>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="row">
+                                <?php
+                                $warisanBudayaRenderer->render();
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="recent-listing">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <h2>Tempat Wisata Premium</h2>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="owl-carousel owl-listing">
+                        <div class="item">
+                            <div class="row">
+                                <?php
+                                // Render WisataPremium
+                                $wisataPremiumRenderer = new ResultRenderer([$wisataPremium]);
+                                $wisataPremiumRenderer->render();
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="recent-listing">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <h2>Informasi Wisata</h2>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="owl-carousel owl-listing">
+                        <div class="item">
+                            <div class="row">
+                                <?php
+                                $wisataPremium->tampilkanInfo(); // Menampilkan informasi untuk WisataPremium
+                                echo "<br>";
+                                $wisataBiasa->tampilkanInfo();   // Menampilkan informasi untuk WisataBiasa
                                 ?>
                             </div>
                         </div>
@@ -374,9 +414,7 @@ https://templatemo.com/tm-564-plot-listing
                         <div class="logo">
                             <img src="assets/images/black-logo.png" alt="Plot Listing">
                         </div>
-                        <p>If you consider that <a rel="nofollow" href="https://templatemo.com/tm-564-plot-listing"
-                                target="_parent">Plot Listing template</a> is useful for your website, please <a
-                                rel="nofollow" href="https://www.paypal.me/templatemo" target="_blank">support us</a> a
+                        <p>If you consider that <a rel="nofollow" href="https://templatemo.com/tm-564-plot-listing" target="_parent">Plot Listing template</a> is useful for your website, please <a rel="nofollow" href="https://www.paypal.me/templatemo" target="_blank">support us</a> a
                             little via PayPal.</p>
                     </div>
                 </div>

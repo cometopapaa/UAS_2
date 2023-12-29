@@ -21,39 +21,28 @@ class Wisata {
         $this->gambar = $gambar;
     }
 
-    public function getname(){
-        return $this->nama;
-    }
-    public function getdeskripsi (){
-        return $this->deskripsi;
-    }
-}
-class sad{
-
-}
-class cari {
-    private $conn;
-    public function search($searchTerm, $table) {
-        $resultList = array();
-
-        $sql = "SELECT * FROM $table WHERE `nama` LIKE '%$searchTerm%' OR `lokasi` LIKE '%$searchTerm%'";
-        $result = $this->conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $resultList[] = new Wisata($row['nama'], $row['lokasi'], $row['deskripsi'], $row['fasilitas'], $row['harga'], $row['aktivitas'], $row['gambar']);
-            }
-        }
-
-        return $resultList;
+    public function tampilkanInfo(){
+        // Menampilkan informasi umum tentang objek wisata
+        // gunanya agar semua kelas turunan class wisata premium dan wisata tanpa pelru didefinisikan ulang
+        echo "Nama: " . $this->nama . "<br>"; //da munculkan nama wisata pakai properti $nama titik(.) gunanya untuk da gabungkan string dengan nilai properti
+        echo "Lokasi: " . $this->lokasi . "<br>";
+        echo "Deskripsi: " . $this->deskripsi . "<br>";
+        echo "Fasilitas: " . $this->fasilitas . "<br>";
+        echo "Harga: " . $this->harga . "<br>";
+        echo "Aktivitas: " . $this->aktivitas . "<br>";
+        echo "Gambar: " . $this->gambar . "<br>";
     }
 }
 
-class MesinPencarianTabel {
-    private $koneksi;
-    private $namaTabel;
+// Kelas Renderer untuk Tempat Wisata
 
-    public function __construct($conn, $namaTabel) {
+class MesinPencarianTabel extends Wisata {
+    private $koneksi; //Encapsulasi Hanya Biasa Diakses Oleh Class MesinPencarianTabel
+    private $namaTabel; //Encapsulasi
+
+    public function __construct($conn, $namaTabel) { // constructor
+        parent::__construct('', '', '', '', '', '', ''); 
+        // Cara memanggil konstruktor dari kelas induk (Wisata) dari dalam kelas anak (MesinPencarianTabel).
         $this->koneksi = $conn;
         $this->namaTabel = $namaTabel;
     }
@@ -74,10 +63,13 @@ class MesinPencarianTabel {
     }
 }
 
-class SearchEngine {
+
+class SearchEngine extends Wisata {
     private $conn;
 
     public function __construct($conn) {
+        parent::__construct("", "", "", "", "", "", "");
+        // Cara memanggil konstruktor dari kelas induk (Wisata) dari dalam kelas anak (SearchEngine).
         $this->conn = $conn;
     }
 
@@ -96,6 +88,18 @@ class SearchEngine {
         return $resultList;
     }
 }
+
+class WisataPremium extends Wisata{
+    public function __construct($nama, $lokasi, $deskripsi, $fasilitas, $harga, $aktivitas, $gambar) {
+        parent::__construct($nama, $lokasi, $deskripsi, $fasilitas, $harga, $aktivitas, $gambar);
+    }
+
+    public function tampilkanInfo(){
+        parent :: tampilkanInfo(); // Memanggil metode tampilkanInfo dari kelas dasar
+        echo "Tipe:Premium<br>";
+    }
+}
+
 class ResultRenderer {
     private $wisataList;
 
