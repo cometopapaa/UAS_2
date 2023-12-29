@@ -109,9 +109,9 @@ class ResultRenderer {
         $this->wisataList = $wisataList;
     }
 
-    public function render() {
-        foreach ($this->wisataList as $wisata) {
-            echo '<div class="col-lg-12">';
+    public function render() { // gunanya ini method untuk da tampilkan HTML dari objek wisata di index.php
+        foreach ($this->wisataList as $wisata) { // da lakukan perulangan untuk tampilkan setiap objek wisata mirip2 den class search engine
+            echo '<div class="col-lg-12">'; // informasi untuk setiap objek
             echo '<div class="listing-item">';
             echo '<div class="left-image">';
             echo '<a href="#"><img src="assets/images/' . $wisata->gambar . '" alt="" width="350" height="300"></a>';
