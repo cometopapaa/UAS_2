@@ -1,7 +1,7 @@
 <?php
 
-class Wisata {
-    public $nama;
+class Wisata { //class induk
+    public $nama; //Properti Gunanya untuk Menyimpan nama Wisata
     public $lokasi;
     public $deskripsi;
     public $fasilitas;
@@ -12,7 +12,7 @@ class Wisata {
     
 
     public function __construct($nama, $lokasi, $deskripsi, $fasilitas, $harga, $aktivitas, $gambar) {
-        $this->nama = $nama;
+        $this->nama = $nama; //Properti objek kek self_name
         $this->lokasi = $lokasi;
         $this->deskripsi = $deskripsi;
         $this->fasilitas = $fasilitas;
@@ -36,30 +36,32 @@ class Wisata {
 
 // Kelas Renderer untuk Tempat Wisata
 
-class MesinPencarianTabel extends Wisata {
+class MesinPencarianTabel extends Wisata { //turuan dari kelas induk dengan kata kunci extends
+        //da warisi properti dari objek wisata dan da tambahkan properti baru kek private $koneksi
     private $koneksi; //Encapsulasi Hanya Biasa Diakses Oleh Class MesinPencarianTabel
     private $namaTabel; //Encapsulasi
 
     public function __construct($conn, $namaTabel) { // constructor
-        parent::__construct('', '', '', '', '', '', ''); 
+        parent::__construct('', '', '', '', '', '', ''); // panggil construktor dari kelas induk dan kita inisialisasi dengan ''
         // Cara memanggil konstruktor dari kelas induk (Wisata) dari dalam kelas anak (MesinPencarianTabel).
-        $this->koneksi = $conn;
+        $this->koneksi = $conn; //kita inisialisasi properti dari nilai yang diterima
         $this->namaTabel = $namaTabel;
     }
 
-    public function cariSemua() {
+    public function cariSemua() { //method untuk melakukan pencarian dari tabel
         $hasilPencarian = array();
 
-        $sql = "SELECT * FROM $this->namaTabel LIMIT 3";
+        $sql = "SELECT * FROM $this->namaTabel LIMIT 3"; // lalu kita buat query ini semacam pagination da tampilkan apa yang di query
         $result = $this->koneksi->query($sql);
 
-        if ($result->num_rows > 0) {
+        if ($result->num_rows > 0) { //jika ada data
             while ($row = $result->fetch_assoc()) {
                 $hasilPencarian[] = new Wisata($row['nama'], $row['lokasi'], $row['deskripsi'], $row['fasilitas'], $row['harga'], $row['aktivitas'], $row['gambar']);
             }
+            // da lakukan literasi membuat objek wisata untuk setiap baris
         }
 
-        return $hasilPencarian;
+        return $hasilPencarian;  //da kembalikan array yang muat ubjek wisata
     }
 }
 
@@ -69,11 +71,11 @@ class SearchEngine extends Wisata {
 
     public function __construct($conn) {
         parent::__construct("", "", "", "", "", "", "");
-        // Cara memanggil konstruktor dari kelas induk (Wisata) dari dalam kelas anak (SearchEngine).
+        // Da panggil konstruktor dari kelas induk (Wisata) untuk inisialissasi properti dari kelas induk juga
         $this->conn = $conn;
     }
 
-    public function search($searchTerm, $table) {
+    public function search($searchTerm, $table) { // mirip2 penjelasannya sama yang pencarian tabel hanya ini da lakukan pencarian dari ketikan
         $resultList = array();
 
         $sql = "SELECT * FROM $table WHERE `nama` LIKE '%$searchTerm%' OR `lokasi` LIKE '%$searchTerm%'";
